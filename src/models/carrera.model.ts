@@ -1,4 +1,10 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
+import {Docente} from './docente.model';
+import {Matricula} from './matricula.model';
+import {Confirmacion} from './confirmacion.model';
+import {Adicion} from './adicion.model';
+import {Cambio} from './cambio.model';
+import {Retiro} from './retiro.model';
 
 @model()
 export class Carrera extends Entity {
@@ -26,6 +32,23 @@ export class Carrera extends Entity {
   })
   id_docente: string;
 
+  @belongsTo(() => Docente)
+  docenteId: string;
+
+  @hasMany(() => Matricula)
+  matriculas: Matricula[];
+
+  @hasMany(() => Confirmacion)
+  confirmacions: Confirmacion[];
+
+  @hasMany(() => Adicion)
+  adicions: Adicion[];
+
+  @hasMany(() => Cambio)
+  cambios: Cambio[];
+
+  @hasMany(() => Retiro)
+  retiros: Retiro[];
 
   constructor(data?: Partial<Carrera>) {
     super(data);

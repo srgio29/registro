@@ -1,4 +1,9 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Matricula} from './matricula.model';
+import {Confirmacion} from './confirmacion.model';
+import {Adicion} from './adicion.model';
+import {Cambio} from './cambio.model';
+import {Retiro} from './retiro.model';
 
 @model()
 export class Alumno extends Entity {
@@ -33,6 +38,20 @@ export class Alumno extends Entity {
   })
   fecha_nacimiento: string;
 
+  @hasMany(() => Matricula)
+  matriculas: Matricula[];
+
+  @hasMany(() => Confirmacion)
+  confirmacions: Confirmacion[];
+
+  @hasMany(() => Adicion)
+  adicions: Adicion[];
+
+  @hasMany(() => Cambio)
+  cambios: Cambio[];
+
+  @hasMany(() => Retiro)
+  retiros: Retiro[];
 
   constructor(data?: Partial<Alumno>) {
     super(data);
